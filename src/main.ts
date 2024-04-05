@@ -1,7 +1,11 @@
 import "./style.css";
 
-import { Game } from "phaser";
+import { Game, Types } from "phaser";
+import { Preloader } from "./scenes/Preloader";
 
-new Game({
+const config: Types.Core.GameConfig = {
   parent: "game-container",
-});
+  scene: [Preloader],
+};
+
+export default new Game(config);
