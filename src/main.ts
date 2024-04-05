@@ -1,5 +1,7 @@
+import "./style.css";
+
 import { Game } from "phaser";
 
-const game = new Game({
+new Game({
   parent: "game-container",
 });
