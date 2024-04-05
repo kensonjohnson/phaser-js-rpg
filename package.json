@@ -4,11 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "vite --config vite/config.development.ts",
+    "build": "tsc && vite build --config vite/config.production.ts",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^20.12.4",
+    "terser": "^5.30.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
