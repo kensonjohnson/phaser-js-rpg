@@ -1,6 +1,6 @@
 # Lint using npm script
 # Requires that a `lint` script is defined in your `package.json`
-name: Lint
+name: CI
 on:
   pull_request:
     branches: ["main"]
