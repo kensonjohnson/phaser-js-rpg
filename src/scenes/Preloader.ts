@@ -5,11 +5,11 @@ import {
   HEALTH_BAR_ASSET_KEYS,
   MONSTER_ASSET_KEYS,
 } from "../config/asset-keys";
+import { SCENE_KEYS } from "../config/scene-keys";
 
 export class Preloader extends Scene {
   constructor() {
-    super({ key: Preloader.name });
-    console.log(Preloader.name);
+    super({ key: SCENE_KEYS.PRELOADER });
   }
 
   preload() {
@@ -56,10 +56,6 @@ export class Preloader extends Scene {
   }
 
   create() {
-    this.add.image(0, 0, BATTLE_BACKGROUND_ASSET_KEYS.FOREST).setOrigin(0);
-  }
-
-  update(_time: number, _delta: number) {
-    console.log("update");
+    this.scene.start(SCENE_KEYS.BATTLE);
   }
 }
