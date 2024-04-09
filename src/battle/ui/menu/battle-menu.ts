@@ -1,5 +1,6 @@
 import type { Scene } from "phaser";
 import { MONSTER_ASSET_KEYS } from "../../../config/asset-keys";
+import { DIRECTION } from "../../../common/direction";
 
 enum BATTLE_MENU_OPTIONS {
   FIGHT = "FIGHT",
@@ -46,6 +47,19 @@ export class BattleMenu {
 
   hideMonsterAttackSubMenu() {
     this.#moveSelectionSubBattleMenuPhaserContainerGameObject?.setAlpha(0);
+  }
+
+  handlePlayerInput(input: DIRECTION | "OK" | "CANCEL") {
+    console.log(input);
+    if (input === "CANCEL") {
+      this.hideMonsterAttackSubMenu();
+      this.showMainBattleMenu();
+      return;
+    }
+    if (input === "OK") {
+      this.hideMainBattleMenu();
+      this.showMonsterAttackSubMenu();
+    }
   }
 
   #createMainBattleMenu() {
