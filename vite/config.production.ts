@@ -6,6 +6,7 @@ export default defineConfig({
   // be changed or removed.
   base: "/phaser-js-rpg/",
   build: {
+    chunkSizeWarningLimit: 1200,
     rollupOptions: {
       output: {
         manualChunks: {
