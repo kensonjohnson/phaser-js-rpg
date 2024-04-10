@@ -16,3 +16,7 @@ export enum HEALTH_BAR_ASSET_KEYS {
   MIDDLE = "MIDDLE",
   RIGHT_CAP = "RIGHT_CAP",
 }
+
+export enum UI_ASSET_KEYS {
+  CURSOR = "CURSOR",
+}
