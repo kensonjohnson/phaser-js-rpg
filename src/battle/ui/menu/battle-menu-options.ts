@@ -6,10 +6,10 @@ export enum BATTLE_MENU_OPTIONS {
 }
 
 export enum ATTACK_MOVE_OPTIONS {
-  MOVE_1 = "MOVE_1",
-  MOVE_2 = "MOVE_2",
-  MOVE_3 = "MOVE_3",
-  MOVE_4 = "MOVE_4",
+  MOVE_1,
+  MOVE_2,
+  MOVE_3,
+  MOVE_4,
 }
 
 export enum ACTIVE_BATTLE_MENU {

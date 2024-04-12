@@ -93,6 +93,14 @@ export class BattleScene extends Scene {
     );
     if (wasSpaceKeyPressed) {
       this.#battleMenu?.handlePlayerInput("OK");
+
+      // Check if the player has selected an attack and update the UI
+      if (this.#battleMenu?.selectedAttack === undefined) return;
+      this.#battleMenu.hideMonsterAttackSubMenu();
+      this.#battleMenu.updateInfoPaneMessagesAndWaitForInput(
+        ["Your monster attacks!"],
+        () => this.#battleMenu?.showMainBattleMenu()
+      );
       return;
     }
 
