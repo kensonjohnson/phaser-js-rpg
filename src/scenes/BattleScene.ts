@@ -1,13 +1,10 @@
 import { Scene } from "phaser";
-import {
-  BATTLE_ASSET_KEYS,
-  BATTLE_BACKGROUND_ASSET_KEYS,
-  HEALTH_BAR_ASSET_KEYS,
-  MONSTER_ASSET_KEYS,
-} from "../config/asset-keys";
+import { BATTLE_ASSET_KEYS, MONSTER_ASSET_KEYS } from "../config/asset-keys";
 import { SCENE_KEYS } from "../config/scene-keys";
 import { BattleMenu } from "../battle/ui/menu/battle-menu";
 import { DIRECTION } from "../common/direction";
+import { Background } from "../battle/background";
+import { HealthBar } from "../battle/ui/health-bar";
 
 export class BattleScene extends Scene {
   #battleMenu?: BattleMenu;
@@ -19,7 +16,8 @@ export class BattleScene extends Scene {
 
   create() {
     // Add the background image
-    this.add.image(0, 0, BATTLE_BACKGROUND_ASSET_KEYS.FOREST).setOrigin(0);
+    const background = new Background(this);
+    background.showForest();
 
     // Render out the player and enemy monsters
     this.add.image(768, 144, MONSTER_ASSET_KEYS.CARNODUSK, 0);
@@ -37,7 +35,8 @@ export class BattleScene extends Scene {
         .image(0, 0, BATTLE_ASSET_KEYS.HEALTH_BAR_BACKGROUND)
         .setOrigin(0),
       playerMonserName,
-      this.#createHealthBar(34, 34),
+      new HealthBar(this, 34, 34).container,
+
       this.add.text(playerMonserName.width + 35, 23, "L5", {
         color: "#ED474B",
         fontSize: "28px",
@@ -68,7 +67,7 @@ export class BattleScene extends Scene {
         .setOrigin(0)
         .setScale(1, 0.8),
       enemyMonserName,
-      this.#createHealthBar(34, 34),
+      new HealthBar(this, 34, 34).container,
       this.add.text(enemyMonserName.width + 35, 23, "L5", {
         color: "#ED474B",
         fontSize: "28px",
@@ -123,24 +122,5 @@ export class BattleScene extends Scene {
     if (selectedDirection !== DIRECTION.NONE) {
       this.#battleMenu?.handlePlayerInput(selectedDirection);
     }
-  }
-
-  #createHealthBar(x: number, y: number) {
-    const scaleY = 0.7;
-    const leftCap = this.add
-      .image(x, y, HEALTH_BAR_ASSET_KEYS.LEFT_CAP)
-      .setOrigin(0, 0.5)
-      .setScale(1, scaleY);
-    const middle = this.add
-      .image(leftCap.x + leftCap.width, y, HEALTH_BAR_ASSET_KEYS.MIDDLE)
-      .setOrigin(0, 0.5)
-      .setScale(1, scaleY);
-    middle.displayWidth = 360;
-    const rightCap = this.add
-      .image(middle.x + middle.displayWidth, y, HEALTH_BAR_ASSET_KEYS.RIGHT_CAP)
-      .setOrigin(0, 0.5)
-      .setScale(1, scaleY);
-
-    return this.add.container(x, y, [leftCap, middle, rightCap]);
   }
 }
