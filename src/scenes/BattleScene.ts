@@ -24,6 +24,7 @@ export class BattleScene extends Scene {
     this.add.image(256, 316, MONSTER_ASSET_KEYS.IGUANIGNITE, 0).setFlipX(true);
 
     // Create player health bar
+    const playerHealthBar = new HealthBar(this, 34, 34);
     const playerMonserName = this.add.text(
       30,
       20,
@@ -35,7 +36,7 @@ export class BattleScene extends Scene {
         .image(0, 0, BATTLE_ASSET_KEYS.HEALTH_BAR_BACKGROUND)
         .setOrigin(0),
       playerMonserName,
-      new HealthBar(this, 34, 34).container,
+      playerHealthBar.container,
 
       this.add.text(playerMonserName.width + 35, 23, "L5", {
         color: "#ED474B",
@@ -55,6 +56,7 @@ export class BattleScene extends Scene {
     ]);
 
     // Create enemy health bar
+    const enemyHealthBar = new HealthBar(this, 34, 34);
     const enemyMonserName = this.add.text(
       30,
       20,
@@ -67,7 +69,7 @@ export class BattleScene extends Scene {
         .setOrigin(0)
         .setScale(1, 0.8),
       enemyMonserName,
-      new HealthBar(this, 34, 34).container,
+      enemyHealthBar.container,
       this.add.text(enemyMonserName.width + 35, 23, "L5", {
         color: "#ED474B",
         fontSize: "28px",
@@ -84,6 +86,12 @@ export class BattleScene extends Scene {
     this.#battleMenu.showMainBattleMenu();
 
     this.#cursorKeys = this.input.keyboard?.createCursorKeys();
+    playerHealthBar.setMeterPercentageAnimated(0.5, {
+      duration: 2000,
+      onComplete: () => {
+        console.log("Amimation complete!");
+      },
+    });
   }
 
   update(_time: number, _delta: number): void {
